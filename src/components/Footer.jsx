@@ -1,5 +1,3 @@
-import React from "react";
-import { motion } from "framer-motion";
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 
 export const Footer = () => {
@@ -66,13 +64,6 @@ export const Footer = () => {
                     <div>
                         <h4 className="text-xs font-bold uppercase tracking-[0.3em] text-cyan-500 mb-8">Social Grid</h4>
                         <div className="flex gap-4">
-                            {/* X (Twitter) */}
-                            <a href="#" className="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" />
-                                </svg>
-                            </a>
-
                             {/* LinkedIn */}
                             <a href="#" className="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all hover:scale-110">
                                 <Linkedin size={18} />
@@ -81,14 +72,6 @@ export const Footer = () => {
                             {/* Instagram */}
                             <a href="#" className="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all hover:scale-110">
                                 <Instagram size={18} />
-                            </a>
-
-                            {/* Discord */}
-                            <a href="#" className="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M7.5 12h.01M16.5 12h.01" />
-                                    <path d="M6.5 17c-2.3-2.1-3.6-5.8-3.6-5.8C4.5 9 7.4 8.7 7.4 8.7L8 10a11.5 11.5 0 0 1 8 0l.6-1.3s2.9.3 4.5 2.5c0 0-1.3 3.7-3.6 5.8 0 0-2.3 2-6.5 0-3.1 1.4-4.5 0-4.5 0" />
-                                </svg>
                             </a>
                         </div>
                     </div>

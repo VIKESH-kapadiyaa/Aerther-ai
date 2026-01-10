@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 
 // Matrix raining characters effect background
 const MatrixBackground = () => {

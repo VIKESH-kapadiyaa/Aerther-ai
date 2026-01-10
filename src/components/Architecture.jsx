@@ -1,14 +1,19 @@
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const ArchitectureNode = ({ title, icon, position, delay, color = "cyan" }) => (
     <motion.div
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay, duration: 0.5, type: "spring" }}
-        animate={{ y: [0, -15, 0] }} // Floating animation
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: Math.random() * 2 }}
+        animate={{
+            y: [0, -15, 0],
+            transition: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 2
+            }
+        }}
         className={`absolute ${position} w-32 h-32 md:w-40 md:h-40 flex flex-col items-center justify-center bg-black border border-${color}-500/30 rounded-full backdrop-blur-md z-10 shadow-[0_0_50px_rgba(34,211,238,0.15)] group hover:border-${color}-400 transition-colors`}
     >
         <div className="text-4xl mb-3 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">{icon}</div>
