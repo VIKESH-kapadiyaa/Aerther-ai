@@ -9,7 +9,7 @@ export const ChatWidget = () => {
     };
 
     return (
-        <div className="fixed bottom-8 right-8 z-[9999]">
+        <div className="chat-widget-container fixed bottom-8 right-8 z-40">
             {/* Toggle Button */}
             <motion.button
                 whileHover={{ scale: 1.05 }}

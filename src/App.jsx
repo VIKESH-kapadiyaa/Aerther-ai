@@ -8,6 +8,7 @@ import { ScrollVideo } from "./components/ScrollProgress";
 import { ChatWidget } from "./components/ChatWidget";
 import { BookingModal } from "./components/BookingModal";
 import { Architecture } from "./components/Architecture";
+import { Work } from "./components/Work";
 import { AnimatePresence, motion } from "framer-motion";
 
 const App = () => {
@@ -69,6 +70,10 @@ const App = () => {
 
             <Architecture />
 
+            <div className="h-20" /> {/* Spacer */}
+            <Work />
+
+            <div className="h-20" /> {/* Spacer */}
             <Pricing />
             <Footer />
             <ChatWidget />
