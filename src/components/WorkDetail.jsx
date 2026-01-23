@@ -36,7 +36,7 @@ export const WorkDetail = ({ project, onClose }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md overflow-y-auto"
+            className="fixed inset-0 z-[100] bg-black overflow-y-auto"
         >
             <div className="min-h-screen py-12 px-6">
                 {/* Close Button */}
@@ -155,7 +155,7 @@ export const WorkDetail = ({ project, onClose }) => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="sticky top-6 h-[600px]"
+                                className="sticky top-6"
                             >
                                 <div className="mb-4">
                                     <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">
@@ -164,19 +164,8 @@ export const WorkDetail = ({ project, onClose }) => {
                                     <div className="h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
                                 </div>
 
-                                <AgentSandbox project={project} />
-
-                                {/* Sandbox Info */}
-                                <div className="mt-4 p-4 bg-white/5 border border-white/10 rounded-xl">
-                                    <div className="flex items-start gap-3">
-                                        <div className="text-2xl">💡</div>
-                                        <div>
-                                            <h4 className="text-sm font-bold text-white mb-1">Try It Live</h4>
-                                            <p className="text-xs text-slate-400 leading-relaxed">
-                                                This is a live sandbox environment. Interact with the agent to see its capabilities in real-time.
-                                            </p>
-                                        </div>
-                                    </div>
+                                <div className="h-[600px]">
+                                    <AgentSandbox project={project} />
                                 </div>
                             </motion.div>
                         </div>

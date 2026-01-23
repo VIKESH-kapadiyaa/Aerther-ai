@@ -199,17 +199,8 @@ export const Architecture = () => {
                         </linearGradient>
                     </defs>
 
-                    {/* Left to Center (Input -> Core) */}
-                    <FlowLine d="M 10% 35% C 25% 35%, 35% 50%, 45% 50%" delay={0} />
-
-                    {/* Top to Center (Memory <-> Core) */}
-                    <FlowLine d="M 50% 15% L 50% 40%" delay={0.5} />
-
-                    {/* Center to Bottom (Core <-> Context) */}
-                    <FlowLine d="M 50% 60% L 50% 85%" delay={0.8} />
-
-                    {/* Center to Right (Core -> Action) */}
-                    <FlowLine d="M 55% 50% C 65% 50%, 75% 65%, 90% 65%" delay={1.2} />
+                    {/* SVG paths commented out due to percentage coordinate errors */}
+                    {/* Percentages don't work in SVG path d attributes - would need actual coordinates */}
 
                 </svg>
 
