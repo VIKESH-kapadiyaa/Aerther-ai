@@ -58,7 +58,7 @@ export const Services = () => {
     return (
         <section
             ref={targetRef}
-            className="relative py-32 bg-black overflow-hidden"
+            className="relative py-32 bg-transparent overflow-hidden"
             id="services"
         >
             <div className="max-w-7xl mx-auto px-6 mb-24">

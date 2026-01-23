@@ -84,7 +84,7 @@ export const Hero = ({ setIsBookingOpen }) => {
         <section
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-8 bg-[#020202] perspective-1000"
+            className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-8 bg-transparent perspective-1000"
         >
             <MatrixBackground />
 

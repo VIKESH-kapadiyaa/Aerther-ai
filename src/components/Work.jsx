@@ -29,7 +29,7 @@ export const Work = () => {
     };
 
     return (
-        <section className="relative min-h-screen py-20 bg-[#0a0a0f] overflow-hidden" id="work">
+        <section className="relative min-h-screen py-20 bg-transparent overflow-hidden" id="work">
             {/* Animated Gradient Background */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] animate-pulse" />

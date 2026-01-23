@@ -9,6 +9,7 @@ import { ChatWidget } from "./components/ChatWidget";
 import { BookingModal } from "./components/BookingModal";
 import { Architecture } from "./components/Architecture";
 import { Work } from "./components/Work";
+import AntigravityBackground from "./components/AntigravityBackground";
 import { AnimatePresence, motion } from "framer-motion";
 
 const App = () => {
@@ -21,7 +22,8 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-[#020202] min-h-screen text-white overflow-x-hidden selection:bg-cyan-500/30">
+    <div className="bg-[#020202] min-h-screen text-white overflow-x-hidden selection:bg-cyan-500/30 relative">
+      <AntigravityBackground />
       <ScrollVideo />
 
       <AnimatePresence>
