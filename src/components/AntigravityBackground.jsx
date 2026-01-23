@@ -2,118 +2,100 @@ import React, { useEffect, useRef } from 'react';
 
 const AntigravityBackground = () => {
     const canvasRef = useRef(null);
-    // Google Brand Colors: Blue, Red, Yellow, Green
     const colors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         let animationFrameId;
-        let particles = [];
-        let time = 0;
+
+        // State
+        const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        const lastMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        let mouseSpeed = 0;
 
         // Configuration
-        const particleCount = 400; // ~300-500
-        const mouse = { x: -1000, y: -1000 };
-        const repulsionRadius = 150;
-        const repulsionStrength = 2;
-        const friction = 0.95;
-        const returnSpeed = 0.05;
+        const particleCount = 190;
+        const blobRadius = 100;
+        const ease = 0.12;
 
-        // Resize handling
-        const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        };
+        // Tail Configuration
+        const tailLength = 8;
+        const tailGravity = 3; // Pixels down per frame of lag
 
         class Particle {
             constructor() {
-                // Initial distribution: Radial scatter with central void
-                const angle = Math.random() * Math.PI * 2;
-                // Scatter radius: keep center clear (min radius ~150px or responsive)
-                const minRadius = Math.min(canvas.width, canvas.height) * 0.15;
-                const maxRadius = Math.max(canvas.width, canvas.height) * 0.6;
-                const radius = minRadius + Math.random() * (maxRadius - minRadius);
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
 
-                this.x = canvas.width / 2 + Math.cos(angle) * radius;
-                this.y = canvas.height / 2 + Math.sin(angle) * radius;
+                this.history = []; // For trail
 
-                // Store original position for "floating back" tendency (optional, or just drift)
-                this.originX = this.x;
-                this.originY = this.y;
+                this.angle = Math.random() * Math.PI * 2;
+                this.orbitRadius = Math.sqrt(Math.random()) * blobRadius;
+                this.orbitSpeed = (Math.random() - 0.5) * 0.02;
 
-                this.vx = 0;
-                this.vy = 0;
-
-                // Random triangle properties
-                this.size = Math.random() * 8 + 4; // 4-12px
+                this.size = Math.random() * 8 + 4;
                 this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.05;
-
-                // Random jitter offset (phase)
-                this.jitterPhase = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.1;
+                this.visible = true;
             }
 
             draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
+                // DRAW TAIL
+                if (this.history.length > 2) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    for (let i = 0; i < this.history.length; i++) {
+                        const point = this.history[i];
+                        // "Falling" effect: larger Y offset for older points
+                        const fallOffset = i * tailGravity;
+                        ctx.lineTo(point.x, point.y + fallOffset);
+                    }
+                    // Tail Style
+                    ctx.strokeStyle = this.color;
+                    ctx.globalAlpha = 0.7; // More visible
+                    ctx.lineWidth = 2; // Thicker
+                    ctx.stroke();
+                    ctx.globalAlpha = 1.0; // Reset
+                }
+
+                ctx.setTransform(Math.cos(this.rotation), Math.sin(this.rotation), -Math.sin(this.rotation), Math.cos(this.rotation), this.x, this.y);
                 ctx.fillStyle = this.color;
 
-                // Draw Triangle
                 ctx.beginPath();
                 ctx.moveTo(0, -this.size / 2);
                 ctx.lineTo(this.size / 2, this.size / 2);
                 ctx.lineTo(-this.size / 2, this.size / 2);
                 ctx.closePath();
                 ctx.fill();
-
-                ctx.restore();
             }
 
-            update() {
-                // 1. Idle Behavior: Jitter & Pulse
-                // Pulse: Global expansion/contraction
-                const pulse = Math.sin(time * 0.02) * 0.5; // Slowly oscillate
-
-                // Jitter: Individual vibration
-                const jitterX = Math.sin(time * 0.1 + this.jitterPhase) * 0.2;
-                const jitterY = Math.cos(time * 0.1 + this.jitterPhase) * 0.2;
-
-                // 2. Mouse Interaction: Repulsion
-                const dx = this.x - mouse.x;
-                const dy = this.y - mouse.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < repulsionRadius) {
-                    const forceDirectionX = dx / distance;
-                    const forceDirectionY = dy / distance;
-                    const force = (repulsionRadius - distance) / repulsionRadius;
-
-                    // Apply force
-                    this.vx += forceDirectionX * force * repulsionStrength;
-                    this.vy += forceDirectionY * force * repulsionStrength;
+            update(time) {
+                // Update History (unshift new position)
+                this.history.unshift({ x: this.x, y: this.y });
+                if (this.history.length > tailLength) {
+                    this.history.pop();
                 }
 
-                // 3. Physics: Friction & Movement
-                this.vx *= friction;
-                this.vy *= friction;
+                // MODE: PURE ROTATING CURSOR BLOB
+                this.angle += this.orbitSpeed;
 
-                // Apply velocity
-                this.x += this.vx;
-                this.y += this.vy;
+                const isStationary = mouseSpeed < 2;
+                const pulse = isStationary ? (1 + Math.sin(time * 0.04) * 0.05) : 1;
 
-                // Drift/Idle movement applied directly to position
-                this.x += jitterX + (this.x - canvas.width / 2) * pulse * 0.001;
-                this.y += jitterY + (this.y - canvas.height / 2) * pulse * 0.001;
+                const targetX = mouse.x + Math.cos(this.angle) * this.orbitRadius * pulse;
+                const targetY = mouse.y + Math.sin(this.angle) * this.orbitRadius * pulse;
 
-                // Rotate slowly
+                // LERP
+                this.x += (targetX - this.x) * ease;
+                this.y += (targetY - this.y) * ease;
+
                 this.rotation += this.rotationSpeed;
             }
         }
 
+        let particles = [];
         const initParticles = () => {
             particles = [];
             for (let i = 0; i < particleCount; i++) {
@@ -121,46 +103,57 @@ const AntigravityBackground = () => {
             }
         };
 
+        let time = 0;
         const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear screen
 
-            // To create trails or specialized background clear:
-            // ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; 
-            // ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const dx = mouse.x - lastMouse.x;
+            const dy = mouse.y - lastMouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            mouseSpeed = mouseSpeed * 0.8 + dist * 0.2;
+            lastMouse.x = mouse.x;
+            lastMouse.y = mouse.y;
 
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
+            particles.forEach(p => {
+                p.update(time);
+                p.draw();
             });
 
             time++;
             animationFrameId = requestAnimationFrame(animate);
         };
 
-        // Event Listeners
-        const handleMouseMove = (e) => {
-            const rect = canvas.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
         };
 
-        const handleMouseLeave = () => {
-            mouse.x = -1000;
-            mouse.y = -1000;
+        // EVENT LISTENERS
+        const handleMouseMove = (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        };
+
+        const handleTouchMove = (e) => {
+            if (e.touches.length > 0) {
+                mouse.x = e.touches[0].clientX;
+                mouse.y = e.touches[0].clientY;
+            }
         };
 
         window.addEventListener('resize', resizeCanvas);
         window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseout', handleMouseLeave);
+        window.addEventListener('touchmove', handleTouchMove);
 
-        // Initial setup
         resizeCanvas();
         animate();
 
         return () => {
             window.removeEventListener('resize', resizeCanvas);
             window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseout', handleMouseLeave);
+            window.removeEventListener('touchmove', handleTouchMove);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
@@ -168,8 +161,10 @@ const AntigravityBackground = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 z-0 pointer-events-none"
-            style={{ background: 'transparent' }} // Let main CSS handle main background color if needed, or set #020202 here
+            className="fixed inset-0 pointer-events-none mix-blend-screen"
+            style={{
+                zIndex: 9999
+            }}
         />
     );
 };
