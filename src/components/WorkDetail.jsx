@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { X, ArrowLeft } from 'lucide-react';
 import { AgentSandbox } from './AgentSandbox';
 import { useEffect } from 'react';
+import { SEO } from './SEO';
 
 export const WorkDetail = ({ project, onClose }) => {
     if (!project) return null;
@@ -41,6 +42,13 @@ export const WorkDetail = ({ project, onClose }) => {
             aria-modal="true"
             aria-labelledby="project-title"
         >
+            <SEO
+                title={project.name}
+                description={project.description}
+                image={project.image}
+                url={`https://aether-ai.com/work/${project.id}`}
+                type="article"
+            />
             <div className="min-h-screen py-12 px-6">
                 {/* Close Button */}
                 <motion.button
