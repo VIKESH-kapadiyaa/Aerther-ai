@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WorkCard } from './WorkCard';
 import { PokerDeck } from './PokerDeck';
+import { ComparisionTool } from './ComparisionTool';
 // import { WorkDetail } from './WorkDetail';
 import { workProjects } from '../data/workData';
 import ParallaxSection from './ParallaxSection';
@@ -16,8 +17,21 @@ export const Work = () => {
     const [isDetailLoading, setIsDetailLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [compareList, setCompareList] = useState([]); // List of IDs
 
     const categories = ['All', ...new Set(workProjects.map(p => p.category).filter(Boolean))];
+
+    const toggleCompare = (e, id) => {
+        e.stopPropagation();
+        setCompareList(prev => {
+            if (prev.includes(id)) return prev.filter(item => item !== id);
+            if (prev.length >= 3) {
+                alert("You can compare up to 3 agents.");
+                return prev;
+            }
+            return [...prev, id];
+        });
+    };
 
     const filteredProjects = workProjects.filter(project => {
         const matchesSearch = project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -173,7 +187,21 @@ export const Work = () => {
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         exit={{ opacity: 0, scale: 0.9 }}
                                                         transition={{ duration: 0.3 }}
+                                                        className="relative group"
                                                     >
+                                                        {/* Comparison Checkbox Overlay */}
+                                                        <div className="absolute top-4 left-4 z-20">
+                                                            <button
+                                                                onClick={(e) => toggleCompare(e, project.id)}
+                                                                className={`w-8 h-8 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md transition-all ${compareList.includes(project.id)
+                                                                        ? 'bg-cyan-500 border-cyan-500 text-black'
+                                                                        : 'bg-black/40 text-transparent hover:bg-black/60 hover:text-white/50'
+                                                                    }`}
+                                                            >
+                                                                {compareList.includes(project.id) ? '✓' : '+'}
+                                                            </button>
+                                                        </div>
+
                                                         <WorkCard
                                                             project={project}
                                                             onClick={handleSelectProject}
@@ -203,10 +231,21 @@ export const Work = () => {
                     )}
                 </AnimatePresence>
 
+
+
                 <AnimatePresence>
+                    {/* Comparison Tool Drawer */}
+                    {compareList.length > 0 && !selectedProject && (
+                        <ComparisionTool
+                            selectedIds={compareList}
+                            onClose={() => setCompareList([])}
+                            onRemove={(id) => setCompareList(prev => prev.filter(p => p !== id))}
+                        />
+                    )}
+
                     {isDetailLoading && <DetailLoader />}
                 </AnimatePresence>
-            </div>
-        </section>
+            </div >
+        </section >
     );
 };

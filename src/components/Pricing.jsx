@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-
+import { PricingCalculator } from './PricingCalculator';
+import ParallaxSection from './ParallaxSection';
 const CheckIcon = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -56,6 +57,20 @@ export const Pricing = () => {
                 >
                     ACCESS <span className="text-cyan-500">GRANTED</span>
                 </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-16"
+                >
+                    Transparent, usage-based scaling for any workload
+                </motion.p>
+
+                {/* Calculator */}
+                <div className="max-w-4xl mx-auto mb-20 text-left">
+                    <PricingCalculator />
+                </div>
                 <p className="text-slate-500 text-lg uppercase tracking-widest font-mono">Select your protocol level</p>
             </div>
 

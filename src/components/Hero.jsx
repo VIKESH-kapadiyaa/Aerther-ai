@@ -69,7 +69,7 @@ const ScrambleText = ({ text, className }) => {
     return <span className={className}>{display}</span>;
 };
 
-export const Hero = ({ setIsBookingOpen }) => {
+export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
     const containerRef = useRef(null);
     const { t } = useLanguage();
     const { playClick, playHover } = useUISound();
@@ -131,7 +131,12 @@ export const Hero = ({ setIsBookingOpen }) => {
                 <motion.div
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-white/[0.03] border border-cyan-500/30 backdrop-blur-xl mb-16 shadow-[0_0_30px_rgba(34,211,238,0.1)]"
+                    onClick={() => {
+                        playClick();
+                        setIsDashboardOpen(true);
+                    }}
+                    onMouseEnter={playHover}
+                    className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-white/[0.03] border border-cyan-500/30 backdrop-blur-xl mb-16 shadow-[0_0_30px_rgba(34,211,238,0.1)] cursor-pointer hover:bg-white/10 transition-colors"
                 >
                     <div className="relative flex h-3 w-3">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>

@@ -20,11 +20,13 @@ const Testimonials = lazy(() => import("./components/Testimonials").then(module 
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { useLanguage } from "./context/LanguageContext";
 import { useUISound } from "./hooks/useUISound";
+import { StatusDashboard } from "./components/StatusDashboard";
 import { HelmetProvider } from 'react-helmet-async';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
   const { t } = useLanguage();
   const { playClick, playHover } = useUISound();
 
@@ -104,7 +106,7 @@ const App = () => {
               </nav>
 
               <RevealOnScroll direction="up" delay={0.2}>
-                <Hero setIsBookingOpen={setIsBookingOpen} />
+                <Hero setIsBookingOpen={setIsBookingOpen} setIsDashboardOpen={setIsDashboardOpen} />
               </RevealOnScroll>
 
               <div className="h-20" /> {/* Spacer */}
@@ -160,6 +162,9 @@ const App = () => {
               </Suspense>
               <ChatWidget />
               <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+              <AnimatePresence>
+                {isDashboardOpen && <StatusDashboard onClose={() => setIsDashboardOpen(false)} />}
+              </AnimatePresence>
             </main>
           )}
         </AnimatePresence>
