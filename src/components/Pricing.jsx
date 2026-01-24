@@ -16,7 +16,7 @@ export const Pricing = () => {
         }
 
         const options = {
-            key: "rzp_live_S2xIe19HV2XR7C", // Live API Key
+            key: import.meta.env.VITE_RAZORPAY_KEY, // Live API Key from env
             amount: amount, // Amount in paise
             currency: "INR",
             name: "Aether AI",
