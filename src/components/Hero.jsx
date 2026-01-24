@@ -102,6 +102,7 @@ export const Hero = ({ setIsBookingOpen }) => {
                     }}
                     transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                     className="w-[500px] h-[500px] bg-cyan-500/10 blur-[100px] rounded-full mix-blend-screen"
+                    style={{ willChange: "transform" }}
                 />
             </ParallaxSection>
             <ParallaxSection offset={50} className="absolute bottom-1/4 right-1/4 pointer-events-none">

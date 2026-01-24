@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WorkCard } from './WorkCard';
 import { PokerDeck } from './PokerDeck';
-import { WorkDetail } from './WorkDetail';
+// import { WorkDetail } from './WorkDetail';
 import { workProjects } from '../data/workData';
 import ParallaxSection from './ParallaxSection';
 import { DetailLoader } from './DetailLoader';
+
+// Lazy Load Detail View
+const WorkDetail = lazy(() => import("./WorkDetail").then(module => ({ default: module.WorkDetail })));
 
 export const Work = () => {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -36,7 +39,7 @@ export const Work = () => {
     };
 
     return (
-        <section className="relative min-h-screen py-20 bg-transparent overflow-hidden" id="work">
+        <section className="relative min-h-screen py-20 bg-transparent overflow-hidden px-6 z-20" id="work">
             {/* Animated Gradient Background */}
             <div className="absolute inset-0 overflow-hidden">
                 <ParallaxSection offset={100} className="absolute top-0 left-1/4">
@@ -135,11 +138,13 @@ export const Work = () => {
                         </motion.div>
                     ) : (
                         // Detail View
-                        <WorkDetail
-                            key="detail"
-                            project={selectedProject}
-                            onClose={handleCloseDetail}
-                        />
+                        <Suspense fallback={<DetailLoader />}>
+                            <WorkDetail
+                                key="detail"
+                                project={selectedProject}
+                                onClose={handleCloseDetail}
+                            />
+                        </Suspense>
                     )}
                 </AnimatePresence>
 

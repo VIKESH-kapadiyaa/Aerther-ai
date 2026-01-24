@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Hero } from "./components/Hero";
-import { Services } from "./components/Services";
-import { Pricing } from "./components/Pricing";
-import { Footer } from "./components/Footer";
-import { Process } from "./components/Process";
 import { ScrollVideo } from "./components/ScrollProgress";
 import { ChatWidget } from "./components/ChatWidget";
 import { BookingModal } from "./components/BookingModal";
-import { Architecture } from "./components/Architecture";
-import { Work } from "./components/Work";
 import AntigravityBackground from "./components/AntigravityBackground";
 import { AnimatePresence, motion } from "framer-motion";
 import RevealOnScroll from "./components/RevealOnScroll";
+import SectionLoader from "./components/SectionLoader";
+
+// Lazy Load Sections
+const Services = lazy(() => import("./components/Services").then(module => ({ default: module.Services })));
+const Pricing = lazy(() => import("./components/Pricing").then(module => ({ default: module.Pricing })));
+const Footer = lazy(() => import("./components/Footer").then(module => ({ default: module.Footer })));
+const Process = lazy(() => import("./components/Process").then(module => ({ default: module.Process })));
+const Architecture = lazy(() => import("./components/Architecture").then(module => ({ default: module.Architecture })));
+const Work = lazy(() => import("./components/Work").then(module => ({ default: module.Work })));
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +27,12 @@ const App = () => {
 
   return (
     <div className="bg-[#020202] min-h-screen text-white overflow-x-hidden selection:bg-cyan-500/30 relative">
+      <a
+        href="#main-content"
+        className="fixed top-4 left-4 z-[10000] px-4 py-2 bg-cyan-500 text-black font-bold uppercase tracking-widest text-xs rounded-full opacity-0 focus:opacity-100 focus:outline-none pointer-events-none focus:pointer-events-auto transition-opacity"
+      >
+        Skip to Content
+      </a>
       <AntigravityBackground />
       <ScrollVideo />
 
@@ -51,14 +60,25 @@ const App = () => {
             </motion.div>
           </motion.div>
         ) : (
-          <main>
+          <main id="main-content">
             {/* Navigation Overlay */}
-            <nav className="fixed top-0 inset-x-0 z-50 px-6 py-6 flex justify-between items-center pointer-events-none mix-blend-difference">
-              <div className="flex items-center gap-3 pointer-events-auto cursor-pointer">
-                <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black">A</div>
+            <nav className="fixed top-0 inset-x-0 z-50 px-6 py-6 flex justify-between items-center pointer-events-none mix-blend-difference" aria-label="Main Navigation">
+              <div
+                className="flex items-center gap-3 pointer-events-auto cursor-pointer"
+                role="button"
+                tabIndex={0}
+                aria-label="Aether AI Home"
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black" aria-hidden="true">A</div>
                 <span className="font-bold tracking-widest hidden md:block">AETHER AI</span>
               </div>
-              <button onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')} className="pointer-events-auto px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors">
+              <button
+                onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')}
+                className="pointer-events-auto px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors"
+                aria-label="Book a call with Aether AI agents"
+              >
                 Book Call
               </button>
             </nav>
@@ -69,34 +89,49 @@ const App = () => {
 
             <div className="h-20" /> {/* Spacer */}
 
-            <RevealOnScroll direction="up" delay={0.1}>
-              <Services />
-            </RevealOnScroll>
+            <div className="h-20" /> {/* Spacer */}
+
+            <Suspense fallback={<SectionLoader />}>
+              <RevealOnScroll direction="up" delay={0.1}>
+                <Services />
+              </RevealOnScroll>
+            </Suspense>
             <div className="h-20" /> {/* Spacer */}
             {/* Process Section can be added here as a separate component */}
             {/* Process Section */}
-            <RevealOnScroll direction="up" delay={0.1}>
-              <Process />
-            </RevealOnScroll>
+            <Suspense fallback={<SectionLoader />}>
+              <RevealOnScroll direction="up" delay={0.1}>
+                <Process />
+              </RevealOnScroll>
+            </Suspense>
 
-            <RevealOnScroll direction="up" delay={0.1}>
-              <Architecture />
-            </RevealOnScroll>
+            <Suspense fallback={<SectionLoader />}>
+              <RevealOnScroll direction="up" delay={0.1}>
+                <Architecture />
+              </RevealOnScroll>
+            </Suspense>
 
             <div className="h-20" /> {/* Spacer */}
-            <RevealOnScroll direction="up" delay={0.1}>
-              <Work />
-            </RevealOnScroll>
-
             <div className="h-20" /> {/* Spacer */}
+            <Suspense fallback={<SectionLoader />}>
+              <RevealOnScroll direction="up" delay={0.1}>
+                <Work />
+              </RevealOnScroll>
+            </Suspense>
 
-            <RevealOnScroll direction="up" delay={0.1}>
-              <Pricing />
-            </RevealOnScroll>
+            <div className="h-40" /> {/* Spacer */}
+            <div className="h-40" /> {/* Spacer */}
+            <Suspense fallback={<SectionLoader />}>
+              <RevealOnScroll direction="up" delay={0.1}>
+                <Pricing />
+              </RevealOnScroll>
+            </Suspense>
 
-            <RevealOnScroll direction="up" delay={0.1}>
-              <Footer />
-            </RevealOnScroll>
+            <Suspense fallback={<div className="h-20 bg-black" />}>
+              <RevealOnScroll direction="up" delay={0.1}>
+                <Footer />
+              </RevealOnScroll>
+            </Suspense>
             <ChatWidget />
             <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
           </main>
