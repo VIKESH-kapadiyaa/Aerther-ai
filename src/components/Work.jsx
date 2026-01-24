@@ -5,10 +5,12 @@ import { PokerDeck } from './PokerDeck';
 import { WorkDetail } from './WorkDetail';
 import { workProjects } from '../data/workData';
 import ParallaxSection from './ParallaxSection';
+import { DetailLoader } from './DetailLoader';
 
 export const Work = () => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [isMobile, setIsMobile] = useState(false);
+    const [isDetailLoading, setIsDetailLoading] = useState(false);
 
     // Detect mobile viewport
     useEffect(() => {
@@ -22,7 +24,11 @@ export const Work = () => {
     }, []);
 
     const handleSelectProject = (project) => {
-        setSelectedProject(project);
+        setIsDetailLoading(true);
+        setTimeout(() => {
+            setSelectedProject(project);
+            setIsDetailLoading(false);
+        }, 800);
     };
 
     const handleCloseDetail = () => {
@@ -135,6 +141,10 @@ export const Work = () => {
                             onClose={handleCloseDetail}
                         />
                     )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                    {isDetailLoading && <DetailLoader />}
                 </AnimatePresence>
             </div>
         </section>

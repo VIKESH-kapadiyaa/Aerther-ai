@@ -75,12 +75,18 @@ const App = () => {
             <div className="h-20" /> {/* Spacer */}
             {/* Process Section can be added here as a separate component */}
             {/* Process Section */}
-            <Process />
+            <RevealOnScroll direction="up" delay={0.1}>
+              <Process />
+            </RevealOnScroll>
 
-            <Architecture />
+            <RevealOnScroll direction="up" delay={0.1}>
+              <Architecture />
+            </RevealOnScroll>
 
             <div className="h-20" /> {/* Spacer */}
-            <Work />
+            <RevealOnScroll direction="up" delay={0.1}>
+              <Work />
+            </RevealOnScroll>
 
             <div className="h-20" /> {/* Spacer */}
 

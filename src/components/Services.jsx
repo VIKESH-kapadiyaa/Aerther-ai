@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import ParallaxSection from './ParallaxSection';
 
 const services = [
     {
@@ -164,8 +165,13 @@ export const Services = () => {
                             </div>
 
                             {/* Decorative Background */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full pointer-events-none -mr-32 -mt-32" />
-                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 blur-[80px] rounded-full pointer-events-none -ml-32 -mb-32" />
+                            {/* Decorative Background */}
+                            <ParallaxSection offset={-20} className="absolute top-0 right-0 pointer-events-none -mr-32 -mt-32">
+                                <div className="w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full" />
+                            </ParallaxSection>
+                            <ParallaxSection offset={20} className="absolute bottom-0 left-0 pointer-events-none -ml-32 -mb-32">
+                                <div className="w-64 h-64 bg-purple-500/5 blur-[80px] rounded-full" />
+                            </ParallaxSection>
                         </motion.div>
                     </div>
                 )}

@@ -14,7 +14,7 @@ const ParallaxSection = ({ children, offset = 50, className = "" }) => {
     const y = useTransform(scrollYProgress, [0, 1], [-offset, offset]);
 
     return (
-        <div ref={ref} className={`relative overflow-hidden ${className}`}>
+        <div ref={ref} className={`${className.includes('absolute') || className.includes('fixed') ? '' : 'relative'} overflow-hidden ${className}`}>
             <motion.div style={{ y }} className="w-full h-full">
                 {children}
             </motion.div>

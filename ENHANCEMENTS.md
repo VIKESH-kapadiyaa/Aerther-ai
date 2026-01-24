@@ -57,10 +57,10 @@
 - [ ] Add project filtering by type (terminal/chat/iframe)
 
 ### 3. **Add More Animations**
-- [ ] Smooth page transitions between sections
-- [ ] Parallax scrolling effects
+- [x] Smooth page transitions between sections
+- [x] Parallax scrolling effects
 - [ ] Particle effects on hover
-- [ ] Loading animations for detail page
+- [x] Loading animations for detail page
 
 ### 4. **Mobile Improvements**
 - [ ] Test and optimize poker deck swipe gestures

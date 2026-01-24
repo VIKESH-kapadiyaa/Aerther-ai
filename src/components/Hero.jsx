@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
+
 import { motion, useMotionValue } from "framer-motion";
+import ParallaxSection from './ParallaxSection';
 
 // Matrix raining characters effect background
 const MatrixBackground = () => {
@@ -86,27 +88,33 @@ export const Hero = ({ setIsBookingOpen }) => {
             onMouseMove={handleMouseMove}
             className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-8 bg-transparent perspective-1000"
         >
-            <MatrixBackground />
+            <ParallaxSection offset={-50} className="absolute inset-0">
+                <MatrixBackground />
+            </ParallaxSection>
 
             {/* Floating Orbs */}
-            <motion.div
-                animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3],
-                    rotate: [0, 180, 360]
-                }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none mix-blend-screen"
-            />
-            <motion.div
-                animate={{
-                    scale: [1.2, 1, 1.2],
-                    opacity: [0.2, 0.4, 0.2],
-                    x: [0, 50, 0]
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"
-            />
+            <ParallaxSection offset={-100} className="absolute top-1/4 left-1/4 pointer-events-none">
+                <motion.div
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.5, 0.3],
+                        rotate: [0, 180, 360]
+                    }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                    className="w-[500px] h-[500px] bg-cyan-500/10 blur-[100px] rounded-full mix-blend-screen"
+                />
+            </ParallaxSection>
+            <ParallaxSection offset={50} className="absolute bottom-1/4 right-1/4 pointer-events-none">
+                <motion.div
+                    animate={{
+                        scale: [1.2, 1, 1.2],
+                        opacity: [0.2, 0.4, 0.2],
+                        x: [0, 50, 0]
+                    }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-[600px] h-[600px] bg-purple-600/10 blur-[120px] rounded-full mix-blend-screen"
+                />
+            </ParallaxSection>
 
             {/* Main Content with 3D Tilt */}
             <motion.div
