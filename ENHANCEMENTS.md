@@ -75,10 +75,10 @@
 - [x] Add loading states
 
 ### 6. **Accessibility**
-- [ ] Add keyboard navigation
-- [ ] Add ARIA labels
-- [ ] Improve color contrast ratios
-- [ ] Add screen reader support
+- [x] Add keyboard navigation
+- [x] Add ARIA labels
+- [x] Improve color contrast ratios
+- [x] Add screen reader support
 
 ### 7. **SEO & Analytics**
 - [ ] Add meta tags for each project

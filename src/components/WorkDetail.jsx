@@ -37,6 +37,9 @@ export const WorkDetail = ({ project, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-black overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-title"
         >
             <div className="min-h-screen py-12 px-6">
                 {/* Close Button */}
@@ -44,7 +47,8 @@ export const WorkDetail = ({ project, onClose }) => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     onClick={onClose}
-                    className="fixed top-6 left-6 z-[110] flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full transition-colors group"
+                    className="fixed top-6 left-6 z-[110] flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full transition-colors group focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    aria-label="Back to projects"
                 >
                     <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
                     <span className="text-sm font-bold">Back</span>
@@ -66,7 +70,7 @@ export const WorkDetail = ({ project, onClose }) => {
                             </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white mb-6">
+                        <h1 id="project-title" className="text-5xl md:text-7xl font-black tracking-tighter text-white mb-6">
                             {project.name}
                         </h1>
 

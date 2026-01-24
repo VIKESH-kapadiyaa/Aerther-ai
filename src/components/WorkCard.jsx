@@ -20,8 +20,17 @@ export const WorkCard = ({ project, onClick }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover="hover"
-            className="group relative rounded-3xl overflow-hidden cursor-pointer h-full"
+            className="group relative rounded-3xl overflow-hidden cursor-pointer h-full focus:outline-none focus:ring-4 focus:ring-cyan-500/50"
             onClick={() => onClick(project)}
+            role="button"
+            tabIndex={0}
+            aria-label={`View details for ${project.name}: ${project.description}`}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onClick(project);
+                }
+            }}
         >
             {/* Vibrant Gradient Background */}
             <div className={`absolute inset-0 bg-gradient-to-br ${getGradient(project.color)} opacity-10`} />

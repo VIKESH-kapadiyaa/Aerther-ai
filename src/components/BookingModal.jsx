@@ -56,13 +56,16 @@ export const BookingModal = ({ isOpen, onClose }) => {
                         exit={{ opacity: 0 }}
                         onClick={onClose}
                         className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer"
+                        aria-hidden="true"
                     />
-
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         className="relative w-full max-w-lg bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.1)]"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-title"
                     >
                         {/* Background Decoration */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none -mr-32 -mt-32" />
@@ -70,12 +73,13 @@ export const BookingModal = ({ isOpen, onClose }) => {
                         <div className="relative z-10">
                             <div className="flex justify-between items-start mb-8">
                                 <div>
-                                    <h3 className="text-2xl font-black text-white tracking-tight mb-2">INITIALIZE UPLINK</h3>
+                                    <h3 id="modal-title" className="text-2xl font-black text-white tracking-tight mb-2">INITIALIZE UPLINK</h3>
                                     <p className="text-slate-400 text-sm">Enter your coordinates to schedule a consultation.</p>
                                 </div>
                                 <button
                                     onClick={onClose}
                                     className="p-2 hover:bg-white/5 rounded-lg transition-colors text-slate-400 hover:text-white"
+                                    aria-label="Close booking modal"
                                 >
                                     ✕
                                 </button>
