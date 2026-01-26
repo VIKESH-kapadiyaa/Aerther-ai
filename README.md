@@ -1,130 +1,138 @@
-# Aether AI | Autonomous Neural Systems
+# Aether AI — Autonomous Neural Systems
 
-> **"Constructing autonomous digital architectures for the post-labor economy."**
+## Overview
 
-Aether AI is a next-generation agency website template built to sell high-ticket AI automation services. It features a cinematic, "sci-fi" aesthetic, advanced React animations, and a seamless single-page application (SPA) flow.
+Aether AI is a **GitHub-ready, production-grade React template** built for AI automation agencies, consultants, and system builders selling high-ticket AI services.
 
-![Aether AI Core](https://grainy-gradients.vercel.app/noise.svg) *Note: Add a real screenshot here*
+It prioritizes **clarity, performance, and credibility** while maintaining a futuristic, minimal aesthetic suitable for enterprise clients.
 
-## ⚡ Key Features
+This repository is intended for developers who want a strong foundation—not a bloated marketing theme.
 
-*   **Cinematic UI:** Dark mode (`#020202`) with Cyan accents (`#22d3ee`) and holographic effects.
-*   **Advanced Animations:**
-    *   **Matrix Rain:** Canvas-less implementation in the Hero section.
-    *   **Neural Flow:** Complex SVG path animations in the Architecture diagram.
-    *   **Physics-Based Scroll:** Scroll-linked animations using `framer-motion`.
-*   **Responsive Design:** Fully fluid layouts (Bento grids, flexboxes) that work on Mobile and Desktop.
-*   **Lead Capture:** Integrated Booking Modal and interactive Chat Widget.
+## Features
 
-## 🛠 Tech Stack
+* Cinematic dark UI with subtle glow and noise
+* Single-page application (SPA) architecture
+* Scroll-linked and interaction-driven animations
+* Modular, reusable React components
+* Conversion-oriented sections (services, pricing, booking)
+* Fully responsive layout
 
-*   **Framework:** [React 19](https://react.dev/)
-*   **Build Tool:** [Vite](https://vitejs.dev/)
-*   **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-*   **Animation:** [Framer Motion](https://www.framer.com/motion/)
-*   **Icons:** [Lucide React](https://lucide.dev/)
+## Tech Stack
 
----
+* **Framework:** React 19
+* **Build Tool:** Vite
+* **Styling:** Tailwind CSS v4
+* **Animation:** Framer Motion
+* **Icons:** Lucide React
+* **Fonts:** Inter, Space Mono
 
-## 📂 Project Structure
+## Project Structure
 
-```bash
+```
 src/
 ├── components/
-│   ├── Architecture.jsx  # Neural Network Visualization (Animated Diagram)
-│   ├── BookingModal.jsx  # Lead capture modal overlay
-│   ├── ChatWidget.jsx    # Floating AI assistant bubble
-│   ├── Footer.jsx        # Site footer with social links
-│   ├── Hero.jsx          # Landing section with Matrix effect & 3D tilt
-│   ├── Partners.jsx      # (Previous) Social proof marquee [Note: Currently disabled]
-│   ├── Pricing.jsx       # Tiered pricing cards (Solo, Company, Enterprise)
-│   ├── Process.jsx       # "The Flow" step-by-step timeline
-│   ├── ScrollProgress.jsx# Scroll-based video/progress indicator
-│   └── Services.jsx      # Bento-grid of core offerings
-├── assets/               # Static images/videos
-├── App.jsx               # Main layout & component composition
-├── index.css             # Global styles, fonts (Inter/Space Mono), and Tailwind imports
-└── main.jsx              # Application entry point
+│   ├── Hero.jsx            # Landing section
+│   ├── Architecture.jsx   # System flow visualization
+│   ├── Services.jsx       # Bento grid offerings
+│   ├── Process.jsx        # Workflow narrative
+│   ├── Pricing.jsx        # Pricing tiers
+│   ├── BookingModal.jsx   # Lead capture
+│   ├── ChatWidget.jsx     # Floating assistant
+│   ├── ScrollProgress.jsx # Scroll indicator
+│   └── Footer.jsx         # Footer
+├── assets/                # Static media
+├── App.jsx                # Root layout
+├── index.css              # Global styles
+└── main.jsx               # Entry point
+
 ```
 
----
+***
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-*   Node.js (v18+ recommended)
-*   npm or yarn
+
+* Node.js 18+
+* npm / yarn / pnpm
 
 ### Installation
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/VIKESH-kapadiyaa/Aerther-ai.git
-    cd Aerther-ai
-    ```
+```
+git clone https://github.com/VIKESH-kapadiyaa/Aerther-ai.git
+cd Aerther-ai
+npm install
 
-2.  **Install Dependencies**
-    ```bash
-    npm install
-    ```
+```
 
-3.  **Run Development Server**
-    ```bash
-    npm run dev
-    ```
-    The site will launch at `http://localhost:5173`.
+### Development
 
----
+```
+npm run dev
 
-## 🧩 Component Documentation & Customization
+```
 
-### 1. **Hero Section (`Hero.jsx`)**
-*   **Effect:** Contains the `MatrixBackground` and `ScrambleText` components.
-*   **Edit:** Change the `h1` text or the "ScrambleText" string to alter the main headline.
-*   **3D Tilt:** The `handleMouseMove` function controls how much the text moves when the mouse hovers.
+Application runs at `http://localhost:5173`
 
-### 2. **Architecture Diagram (`Architecture.jsx`)**
-*   **Logic:** Uses SVG paths with `framer-motion` to act as "data cables".
-*   **Customization:**
-    *   **Nodes:** Edit the `<ArchitectureNode />` calls to change icons/labels (e.g., "Vector DB" -> "Database").
-    *   **Speed:** Adjust `duration` props in `FlowLine` to make the data pulsate faster/slower.
+### Build
 
-### 3. **Services Grid (`Services.jsx`)**
-*   **Layout:** A CSS Grid "Bento Box".
-*   **Edit:** Modify the `services` array at the top of the file.
-    *   `colSpan`: Controls width (`md:col-span-4` vs `md:col-span-8`).
-    *   `bg`: Controls the background gradient/color of the card.
+```
+npm run build
+npm run preview
 
-### 4. **Pricing (`Pricing.jsx`)**
-*   **Tiers:** "Solo Founder", "Company Systems", "Enterprise".
-*   **Edit:** Update the prices, "upto" text, and features checklist directly in the JSX.
-*   **Design:** The middle card ("Company Systems") uses a specific gradient to stand out (`bg-gradient-to-b`).
+```
 
----
+***
 
-## 🚢 Deployment
+## Customization
 
-### Vercel (Recommended)
-1.  Push your code to GitHub.
-2.  Import the repo into Vercel.
-3.  Vercel will auto-detect Vite.
-4.  Click **Deploy**.
+* **Branding:** Update colors and fonts in `index.css`
+* **Content:** Edit section data directly inside components
+* **Services & Pricing:** Modify arrays in `Services.jsx` and `Pricing.jsx`
+* **Animations:** Tune motion values in Framer Motion configs
+
+The codebase is intentionally explicit—no hidden magic.
+
+***
+
+## Deployment
+
+### Vercel (recommended)
+
+* Import the repository
+* Framework preset: **Vite**
+* Build command: `npm run build`
+* Output directory: `dist`
 
 ### Netlify
-1.  Drag and drop the `dist/` folder (run `npm run build` first) or connect Git.
-2.  Build command: `npm run build`
-3.  Publish directory: `dist`
 
----
+* Build command: `npm run build`
+* Publish directory: `dist`
 
-## 🎨 Design Tokens
+## Performance Notes
 
-*   **Primary Color:** Cyan-500 (`#06b6d4` / `#22d3ee`)
-*   **Background:** Ultra Black (`#020202`)
-*   **Fonts:**
-    *   Headlines/Body: `'Inter', sans-serif`
-    *   Technical Data: `'Space Mono', monospace`
+* No canvas-heavy rendering
+* Minimal layout shift
+* Motion reduced on low-power devices
 
----
+For SEO and analytics, integrate your preferred tools manually.
 
-© 2026 Aether AI Automation Agency. All Systems Operational.
+## Contributing
+
+This project follows a **clean, opinionated structure**.
+
+Contributions are welcome for:
+
+* Performance improvements
+* Accessibility enhancements
+* Code clarity and refactors
+
+Open an issue before major changes.
+
+## License
+
+MIT License
+
+***
+
+© 2026 Aether AI
