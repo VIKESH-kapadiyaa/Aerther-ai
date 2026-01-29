@@ -1,9 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check } from 'lucide-react';
 import { workProjects } from '../data/workData';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
-
+    const { t } = useLanguage();
     const selectedProjects = workProjects.filter(p => selectedIds.includes(p.id));
 
     if (selectedProjects.length === 0) return null;
@@ -24,7 +25,7 @@ export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
                 </button>
 
                 <h3 className="text-2xl font-black text-white mb-8 flex items-center gap-3">
-                    <span className="text-cyan-500">AGENT</span> COMPARISON
+                    <span className="text-cyan-500">{t('work.comparison.title_agent')}</span> {t('work.comparison.title_comparison')}
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -49,11 +50,11 @@ export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
 
                             <div className="space-y-4">
                                 <div>
-                                    <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">Personality</p>
+                                    <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">{t('work.comparison.personality')}</p>
                                     <p className="text-white font-mono text-sm capitalize">{project.personality}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">Tags</p>
+                                    <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">{t('work.comparison.tags')}</p>
                                     <div className="flex flex-wrap gap-2">
                                         {project.tags?.map(tag => (
                                             <span key={tag} className="text-[10px] px-2 py-1 bg-white/10 rounded-full text-slate-300">
@@ -63,7 +64,7 @@ export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
                                     </div>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">Integration</p>
+                                    <p className="text-xs text-slate-500 uppercase tracking-widest mb-1">{t('work.comparison.integration')}</p>
                                     <div className="flex items-center gap-2">
                                         <Check size={14} className="text-emerald-500" />
                                         <span className="text-sm text-slate-300">REST API</span>
@@ -74,8 +75,11 @@ export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
                                     </div>
                                 </div>
                                 <div className="pt-4 border-t border-white/10">
-                                    <button className="w-full py-3 bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-cyan-400 transition-colors">
-                                        Deploy Agent
+                                    <button
+                                        onClick={() => window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank')}
+                                        className="w-full py-3 bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-cyan-400 transition-colors"
+                                    >
+                                        {t('work.comparison.deploy')}
                                     </button>
                                 </div>
                             </div>
@@ -85,7 +89,7 @@ export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
                     {selectedProjects.length < 3 && (
                         <div className="hidden md:flex items-center justify-center border-2 border-dashed border-white/10 rounded-2xl p-6 min-h-[400px]">
                             <p className="text-slate-600 text-sm text-center">
-                                Select another agent<br />to compare
+                                {t('work.comparison.select_more')}
                             </p>
                         </div>
                     )}

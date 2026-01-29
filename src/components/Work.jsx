@@ -7,6 +7,7 @@ import { ComparisionTool } from './ComparisionTool';
 import { workProjects } from '../data/workData';
 import ParallaxSection from './ParallaxSection';
 import { DetailLoader } from './DetailLoader';
+import { useLanguage } from "../context/LanguageContext";
 
 // Lazy Load Detail View
 const WorkDetail = lazy(() => import("./WorkDetail").then(module => ({ default: module.WorkDetail })));
@@ -18,6 +19,7 @@ export const Work = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [compareList, setCompareList] = useState([]); // List of IDs
+    const { t } = useLanguage();
 
     const categories = ['All', ...new Set(workProjects.map(p => p.category).filter(Boolean))];
 
@@ -100,7 +102,7 @@ export const Work = () => {
                                 >
                                     <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 animate-pulse" />
                                     <span className="text-xs font-mono uppercase tracking-widest bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                                        AI Agent Portfolio
+                                        {t('work.portfolio_badge')}
                                     </span>
                                 </motion.div>
 
@@ -111,7 +113,7 @@ export const Work = () => {
                                     className="text-6xl md:text-9xl font-black tracking-tighter mb-6"
                                 >
                                     <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                                        WORK
+                                        {t('work.title')}
                                     </span>
                                 </motion.h2>
 
@@ -121,13 +123,13 @@ export const Work = () => {
                                     transition={{ delay: 0.2 }}
                                     className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto"
                                 >
-                                    Cutting-edge AI agents powering the future of automation
+                                    {t('work.subtitle')}
                                 </motion.p>
 
                                 <div className="flex items-center justify-center gap-4 mt-8">
                                     <span className="h-px w-12 bg-gradient-to-r from-transparent to-purple-500/50" />
                                     <span className="text-xs font-mono uppercase tracking-[0.3em] bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                                        {filteredProjects.length} Active Agents
+                                        {filteredProjects.length} {t('work.active_agents')}
                                     </span>
                                     <span className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-500/50" />
                                 </div>
@@ -154,7 +156,7 @@ export const Work = () => {
                                     <div className="relative w-full max-w-xs">
                                         <input
                                             type="text"
-                                            placeholder="Search agents..."
+                                            placeholder={t('work.search_placeholder')}
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                             className="w-full bg-white/5 border border-white/10 rounded-full px-5 py-2 pl-10 text-sm text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/10 transition-all placeholder:text-slate-600"
@@ -194,8 +196,8 @@ export const Work = () => {
                                                             <button
                                                                 onClick={(e) => toggleCompare(e, project.id)}
                                                                 className={`w-8 h-8 rounded-full border border-white/20 flex items-center justify-center backdrop-blur-md transition-all ${compareList.includes(project.id)
-                                                                        ? 'bg-cyan-500 border-cyan-500 text-black'
-                                                                        : 'bg-black/40 text-transparent hover:bg-black/60 hover:text-white/50'
+                                                                    ? 'bg-cyan-500 border-cyan-500 text-black'
+                                                                    : 'bg-black/40 text-transparent hover:bg-black/60 hover:text-white/50'
                                                                     }`}
                                                             >
                                                                 {compareList.includes(project.id) ? '✓' : '+'}
@@ -210,7 +212,7 @@ export const Work = () => {
                                                 ))
                                             ) : (
                                                 <div className="col-span-3 text-center py-20 text-slate-500">
-                                                    No agents found matching your query.
+                                                    {t('work.no_results')}
                                                 </div>
                                             )}
                                         </AnimatePresence>

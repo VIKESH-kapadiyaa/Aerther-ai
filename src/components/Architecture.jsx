@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 const ArchitectureNode = ({ title, icon, position, delay, color = "cyan" }) => (
     <motion.div
@@ -74,6 +75,8 @@ const FlowLine = ({ d, delay }) => {
 
 
 export const Architecture = () => {
+    const { t } = useLanguage();
+
     return (
         <section className="py-40 bg-[#020202] relative overflow-hidden" id="architecture">
 
@@ -87,12 +90,12 @@ export const Architecture = () => {
                     viewport={{ once: true }}
                     className="text-5xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 mb-6"
                 >
-                    NEURAL <span className="text-cyan-500">FLOW</span>
+                    {t('architecture.title_neural')} <span className="text-cyan-500">{t('architecture.title_flow')}</span>
                 </motion.h2>
                 <div className="flex items-center justify-center gap-4">
                     <span className="h-px w-12 bg-cyan-500/50" />
                     <p className="text-cyan-500 font-mono uppercase tracking-[0.3em] text-xs">
-                        Autonomous Logic Processing
+                        {t('architecture.subtitle')}
                     </p>
                     <span className="h-px w-12 bg-cyan-500/50" />
                 </div>
@@ -124,9 +127,9 @@ export const Architecture = () => {
                                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                                 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-2"
                             >
-                                CORE
+                                {t('architecture.core')}
                             </motion.div>
-                            <div className="text-[10px] font-mono text-cyan-400 tracking-[0.5em] bg-black/50 px-2 py-1 rounded">SYSTEM.LOGIC</div>
+                            <div className="text-[10px] font-mono text-cyan-400 tracking-[0.5em] bg-black/50 px-2 py-1 rounded">{t('architecture.system_logic')}</div>
                         </div>
                     </div>
 
@@ -142,7 +145,7 @@ export const Architecture = () => {
 
                 {/* 1. INPUT (Left) */}
                 <ArchitectureNode
-                    title="Ingestion"
+                    title={t('architecture.nodes.ingestion')}
                     icon="📥"
                     position="left-4 top-20 md:left-10 md:top-1/3"
                     delay={0.2}
@@ -151,7 +154,7 @@ export const Architecture = () => {
 
                 {/* 2. MEMORY (Top) */}
                 <ArchitectureNode
-                    title="Vector DB"
+                    title={t('architecture.nodes.vector_db')}
                     icon="🧠"
                     position="top-10 left-1/2 -translate-x-1/2"
                     delay={0.4}
@@ -160,7 +163,7 @@ export const Architecture = () => {
 
                 {/* 3. HISTORY (Bottom) */}
                 <ArchitectureNode
-                    title="Context"
+                    title={t('architecture.nodes.context')}
                     icon="📂"
                     position="bottom-10 left-1/2 -translate-x-1/2"
                     delay={0.5}
@@ -169,7 +172,7 @@ export const Architecture = () => {
 
                 {/* 4. EXECUTION (Right) */}
                 <ArchitectureNode
-                    title="Action"
+                    title={t('architecture.nodes.action')}
                     icon="⚡"
                     position="right-4 bottom-20 md:right-10 md:bottom-1/3"
                     delay={0.6}

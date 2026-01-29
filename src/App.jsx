@@ -107,7 +107,7 @@ const App = () => {
                   <button
                     onClick={() => {
                       playClick();
-                      window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank');
+                      window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank');
                     }}
                     onMouseEnter={playHover}
                     className="pointer-events-auto px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors"

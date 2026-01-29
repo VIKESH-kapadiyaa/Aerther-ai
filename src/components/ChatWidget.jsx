@@ -5,7 +5,7 @@ export const ChatWidget = () => {
 
     // Function to open the chat in a new tab
     const openChat = () => {
-        window.open('https://atherai2026.app.n8n.cloud/webhook/a889d2ae-2159-402f-b326-5f61e90f602e/chat', '_blank');
+        window.open('https://aether26.app.n8n.cloud/webhook/chatbot', '_blank');
     };
 
     return (

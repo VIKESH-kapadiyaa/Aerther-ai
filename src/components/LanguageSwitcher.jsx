@@ -7,9 +7,11 @@ export const LanguageSwitcher = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const languages = [
-        { code: 'en', label: 'EN' },
-        { code: 'fr', label: 'FR' },
-        { code: 'es', label: 'ES' }
+        { code: 'en', label: 'English' },
+        { code: 'fr', label: 'Français' },
+        { code: 'es', label: 'Español' },
+        { code: 'hi', label: 'हिन्दी' },
+        { code: 'hi-en', label: 'Hinglish' }
     ];
 
     return (
@@ -19,7 +21,9 @@ export const LanguageSwitcher = () => {
                 className="flex items-center gap-2 px-3 py-1.5 bg-black/50 border border-white/10 rounded-full text-xs font-mono font-bold uppercase tracking-wider hover:bg-white/10 transition-colors"
                 aria-label="Change Language"
             >
-                <span className={locale === 'en' ? 'text-cyan-400' : 'text-white'}>{locale.toUpperCase()}</span>
+                <span className={locale === 'en' ? 'text-cyan-400' : 'text-white'}>
+                    {languages.find(l => l.code === locale)?.label || locale.toUpperCase()}
+                </span>
                 <span className="text-[8px] opacity-50">▼</span>
             </button>
 

@@ -42,7 +42,7 @@ const RevealOnScroll = ({ children, width = "100%", delay = 0, direction = "up",
     };
 
     return (
-        <div ref={ref} style={{ width, overflow: "hidden" }} className={className}>
+        <div ref={ref} style={{ width, overflow: "hidden", position: "relative" }} className={className}>
             <motion.div
                 variants={getVariants()}
                 initial="hidden"

@@ -148,8 +148,8 @@ export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
                 </motion.div>
 
                 {/* HEADLINE */}
-                <div className="relative mb-16">
-                    <h1 className="text-5xl md:text-8xl lg:text-[150px] leading-tight md:leading-[0.8] font-black tracking-tighter select-none mix-blend-screen">
+                <div className="relative mb-12 md:mb-16">
+                    <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[150px] leading-tight md:leading-[0.8] font-black tracking-tighter select-none mix-blend-screen">
                         <span className="block text-slate-800/50 absolute top-2 left-2 blur-sm transform translate-x-2">AUTOMATE</span>
                         <ScrambleText text="AUTOMATE" className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-slate-500" />
 
@@ -157,12 +157,12 @@ export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
                             initial={{ opacity: 0, x: -100 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.5 }}
-                            className="flex items-center justify-center gap-4 md:gap-12 w-full"
+                            className="flex items-center justify-center gap-3 md:gap-12 w-full mt-2 md:mt-0"
                         >
-                            <span className="text-4xl md:text-[60px] font-light italic text-cyan-500/80 font-mono tracking-widest opacity-80">
+                            <span className="text-2xl sm:text-4xl md:text-[60px] font-light italic text-cyan-500/80 font-mono tracking-widest opacity-80">
                                 {t('hero.title_prefix')}
                             </span>
-                            <span className="bg-white text-black px-4 md:px-8 transform -skew-x-12 inline-block">
+                            <span className="bg-white text-black px-3 md:px-8 py-1 md:py-0 text-2xl sm:text-4xl md:text-[60px] transform -skew-x-12 inline-block">
                                 {t('hero.title_future')}
                             </span>
                         </motion.div>
@@ -188,7 +188,7 @@ export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
                         <button
                             onClick={() => {
                                 playClick();
-                                window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank');
+                                window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank');
                             }}
                             onMouseEnter={playHover}
                             className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none hover:bg-cyan-400 transition-all overflow-hidden"
